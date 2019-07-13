@@ -1,5 +1,5 @@
 <h1>New Family</h1>
 
-<%= render 'form', family: @family %>
+<%= render 'form', family: @family, url: organization_families_path %>
 
-<%= link_to 'Back', families_path %>
+<%= link_to 'Back', organization_families_path, class: "btn btn-info" %>

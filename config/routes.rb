@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :organizations do
-    resources :families do
+    resources :families do 
       resources :members
     end
   end

@@ -4,7 +4,7 @@ class FamiliesController < ApplicationController
   # GET /families
   # GET /families.json
   def index
-    @families = Family.all
+    @families = Family.where(organization_id: params[:organization_id]).all
   end
 
   # GET /families/1
@@ -15,6 +15,7 @@ class FamiliesController < ApplicationController
   # GET /families/new
   def new
     @family = Family.new
+    @family.build_user
   end
 
   # GET /families/1/edit
@@ -25,14 +26,13 @@ class FamiliesController < ApplicationController
   # POST /families.json
   def create
     @family = Family.new(family_params)
+    @family.organization_id = params[:organization_id]
 
     respond_to do |format|
       if @family.save
-        format.html { redirect_to @family, notice: 'Family was successfully created.' }
-        format.json { render :show, status: :created, location: @family }
+        format.html { redirect_to family_url, notice: 'Family was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @family.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,11 +42,9 @@ class FamiliesController < ApplicationController
   def update
     respond_to do |format|
       if @family.update(family_params)
-        format.html { redirect_to @family, notice: 'Family was successfully updated.' }
-        format.json { render :show, status: :ok, location: @family }
+        format.html { redirect_to family_url, notice: 'Family was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @family.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,7 +54,7 @@ class FamiliesController < ApplicationController
   def destroy
     @family.destroy
     respond_to do |format|
-      format.html { redirect_to families_url, notice: 'Family was successfully destroyed.' }
+      format.html { redirect_to family_url, notice: 'Family was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,8 +65,13 @@ class FamiliesController < ApplicationController
       @family = Family.find(params[:id])
     end
 
+    def family_url
+      organization_families_path(params[:organization_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def family_params
-      params.require(:family).permit(:name, :phone)
+      params.require(:family).permit(:name, :phone,
+      user_attributes: [:id, :email, :password, :password_confirmation, :role])
     end
 end

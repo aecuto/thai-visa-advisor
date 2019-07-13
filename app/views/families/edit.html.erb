@@ -1,6 +1,5 @@
 <h1>Editing Family</h1>
 
-<%= render 'form', family: @family %>
+<%= render 'form', family: @family, url: organization_family_path %>
 
-<%= link_to 'Show', @family %> |
-<%= link_to 'Back', families_path %>
+<%= link_to 'Back', organization_families_path, class: "btn btn-info" %>

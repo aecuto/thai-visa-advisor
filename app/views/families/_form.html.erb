@@ -1,23 +1,29 @@
-<%= form_with(model: family, local: true) do |form| %>
-  <% if family.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(family.errors.count, "error") %> prohibited this family from being saved:</h2>
+<% if family.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(family.errors.count, "error") %> prohibited this family from being saved:</h2>
 
-      <ul>
-      <% family.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+    <ul>
+    <% family.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= bootstrap_form_with(model: family, local: true, url: url) do |form| %>
+
+  <%= form.fields_for :user do |f| %>
+    <%= f.text_field :email %>
+    <%= f.password_field :password %>
+    <%= f.password_field :password_confirmation %>
+    <%= f.hidden_field :role, value: 'member' %>
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :phone %>
     <%= form.text_field :phone %>
   </div>
 
