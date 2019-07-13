@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<div class="row">
+<div class="row manage-title">
   <div class="col"><h1>Organizations</h1></div>
   <div class="col text-right"><%= link_to 'New Organization', new_organization_path, class: "btn btn-primary" %></div>
 </div>
@@ -9,8 +9,10 @@
   <div class="col">NO DATA</div>
 <% end %>
 
+<div class="row">
 <% @organizations.each do |organization| %>
-  <div class="card" style="width: 18rem;">
+<div class="col-3">
+  <div class="card">
     <div class="card-body">
       <h5 class="card-title a-link">
         <%= link_to organization.name, organization_families_path(organization), class: 'card-link' %>
@@ -21,8 +23,10 @@
       <%= link_to 'Edit', edit_organization_path(organization), class: 'btn btn-warning' %>
       <%= link_to 'Destroy', organization, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
     </div>
+  </div>
 </div>
 <% end %>
+</div>
 
 
 

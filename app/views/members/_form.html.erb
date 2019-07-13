@@ -1,52 +1,26 @@
-<%= form_with(model: member, local: true) do |form| %>
-  <% if member.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(member.errors.count, "error") %> prohibited this member from being saved:</h2>
 
-      <ul>
-      <% member.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<% if member.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(member.errors.count, "error") %> prohibited this member from being saved:</h2>
 
-  <div class="field">
-    <%= form.label :full_name %>
-    <%= form.text_field :full_name %>
+    <ul>
+    <% member.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
   </div>
+<% end %>
 
-  <div class="field">
-    <%= form.label :visa_exp %>
-    <%= form.date_select :visa_exp %>
-  </div>
+<%= bootstrap_form_with(model: member, local: true, url: url) do |form| %>
 
-  <div class="field">
-    <%= form.label :wp_exp %>
-    <%= form.date_select :wp_exp %>
-  </div>
+  <%= form.text_field :first_name %>
+  <%= form.text_field :last_name %>
+  <%= form.date_field :visa_exp %>
+  <%= form.date_field :wp_exp %>
+  <%= form.date_field :noti90 %>
+  <%= form.date_field :passport_exp %>
+  <%= form.date_field :doe %>
+  <%= form.date_field :dob %>
+  <%= form.submit %>
 
-  <div class="field">
-    <%= form.label :noti90 %>
-    <%= form.date_select :noti90 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :passport_exp %>
-    <%= form.date_select :passport_exp %>
-  </div>
-
-  <div class="field">
-    <%= form.label :doe %>
-    <%= form.date_select :doe %>
-  </div>
-
-  <div class="field">
-    <%= form.label :dob %>
-    <%= form.date_select :dob %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

@@ -50,7 +50,8 @@ ActiveRecord::Schema.define(version: 2019_07_13_155857) do
   end
 
   create_table "members", force: :cascade do |t|
-    t.string "full_name"
+    t.string "first_name"
+    t.string "last_name"
     t.date "visa_exp"
     t.date "wp_exp"
     t.date "noti90"
@@ -88,7 +89,9 @@ ActiveRecord::Schema.define(version: 2019_07_13_155857) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "role"
+    t.boolean "is_admin", default: false
+    t.boolean "is_organization", default: false
+    t.boolean "is_family", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

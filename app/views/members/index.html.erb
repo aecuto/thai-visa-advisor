@@ -1,39 +1,36 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Members</h1>
+<div class="row manage-title">
+  <div class="col"><h1>Members</h1></div>
+  <div class="col text-right"><%= link_to 'New Member', new_organization_family_member_path, class: "btn btn-primary" %></div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Full name</th>
-      <th>Visa exp</th>
-      <th>Wp exp</th>
-      <th>Noti90</th>
-      <th>Passport exp</th>
-      <th>Doe</th>
-      <th>Dob</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% if !@members.present? %>
+  <div class="col">NO DATA</div>
+<% end %>
 
-  <tbody>
-    <% @members.each do |member| %>
-      <tr>
-        <td><%= member.full_name %></td>
-        <td><%= member.visa_exp %></td>
-        <td><%= member.wp_exp %></td>
-        <td><%= member.noti90 %></td>
-        <td><%= member.passport_exp %></td>
-        <td><%= member.doe %></td>
-        <td><%= member.dob %></td>
-        <td><%= link_to 'Show', member %></td>
-        <td><%= link_to 'Edit', edit_member_path(member) %></td>
-        <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row">
+<% @members.each do |member| %>
+<div class="col-3">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title a-link">
+       <%= member.first_name %> <%= member.last_name %> 
+      </h5>
+      <p class="card-text">visa_exp: <%= member.visa_exp || '-' %></p>
+      <p class="card-text">wp_exp: <%= member.wp_exp || '-' %></p>
+      <p class="card-text">noti90: <%= member.noti90 || '-'%></p>
+      <p class="card-text">passport_exp: <%= member.passport_exp || '-'%></p>
+      <p class="card-text">passport_exp: <%= member.passport_exp || '-'%></p>
+      <p class="card-text">doe: <%= member.doe || '-'%></p>
+      <p class="card-text">dob: <%= member.dob || '-'%></p>
 
-<br>
+      <%= link_to 'Edit', edit_organization_family_member_path(@organization, @family, member), class: 'btn btn-warning' %>
+      <%= link_to 'Destroy', organization_family_member_path(@organization, @family, member), class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  </div>
+</div>
+<% end %>
+</div>
 
-<%= link_to 'New Member', new_member_path %>
+

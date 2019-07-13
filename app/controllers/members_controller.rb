@@ -1,10 +1,11 @@
 class MembersController < ApplicationController
-  before_action :set_member, only: [:show, :edit, :update, :destroy]
+  before_action :set_member, only: [:edit, :update, :destroy]
+  before_action :set_organization, :set_family
 
   # GET /members
   # GET /members.json
   def index
-    @members = Member.all
+    @members = Member.where(family_id: @family.id)
   end
 
   # GET /members/1
@@ -25,14 +26,13 @@ class MembersController < ApplicationController
   # POST /members.json
   def create
     @member = Member.new(member_params)
+    @member.family_id = @family.id
 
     respond_to do |format|
       if @member.save
-        format.html { redirect_to @member, notice: 'Member was successfully created.' }
-        format.json { render :show, status: :created, location: @member }
+        format.html { redirect_to organization_family_members_new_url, notice: 'Member was successfully created.' }
       else
-        format.html { render :new }
-        format.json { render json: @member.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -42,11 +42,9 @@ class MembersController < ApplicationController
   def update
     respond_to do |format|
       if @member.update(member_params)
-        format.html { redirect_to @member, notice: 'Member was successfully updated.' }
-        format.json { render :show, status: :ok, location: @member }
+        format.html { redirect_to organization_family_members_new_url, notice: 'Member was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @member.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,19 +54,30 @@ class MembersController < ApplicationController
   def destroy
     @member.destroy
     respond_to do |format|
-      format.html { redirect_to members_url, notice: 'Member was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to organization_family_members_new_url, notice: 'Member was successfully destroyed.' }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_member
-      @member = Member.find(params[:id])
+      @member = Member.friendly.find(params[:id])
+    end
+
+    def set_family
+      @family = Family.friendly.find(params[:family_id])
+    end
+
+    def set_organization
+      @organization = Organization.friendly.find(params[:organization_id])
+    end
+
+    def organization_family_members_new_url
+      organization_family_members_path(@organization, @family)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      params.require(:member).permit(:full_name, :visa_exp, :wp_exp, :noti90, :passport_exp, :doe, :dob)
+      params.require(:member).permit(:first_name, :last_name, :visa_exp, :wp_exp, :noti90, :passport_exp, :doe, :dob)
     end
 end

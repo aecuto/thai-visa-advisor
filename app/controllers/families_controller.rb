@@ -56,7 +56,6 @@ class FamiliesController < ApplicationController
     @family.destroy
     respond_to do |format|
       format.html { redirect_to organization_families_new_url, notice: 'Family was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
