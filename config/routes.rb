@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
-  devise_for :admins
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users
+
   root 'home#index'
+
+  devise_for :admins
+  devise_for :users
+
+  resources :organizations do
+    resources :families do
+      resources :members
+    end
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_10_091134) do
+ActiveRecord::Schema.define(version: 2019_07_13_113917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,48 @@ ActiveRecord::Schema.define(version: 2019_06_10_091134) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "families", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.bigint "organization_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_families_on_organization_id"
+    t.index ["user_id"], name: "index_families_on_user_id"
+  end
+
+  create_table "members", force: :cascade do |t|
+    t.string "full_name"
+    t.date "visa_exp"
+    t.date "wp_exp"
+    t.date "noti90"
+    t.date "passport_exp"
+    t.date "doe"
+    t.date "dob"
+    t.bigint "family_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["family_id"], name: "index_members_on_family_id"
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name"
+    t.text "address"
+    t.string "phone"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_organizations_on_user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -35,6 +77,7 @@ ActiveRecord::Schema.define(version: 2019_06_10_091134) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+
+<div class="row">
+  <div class="col"><h1>Organizations</h1></div>
+  <div class="col text-right"><%= link_to 'New Organization', new_organization_path, class: "btn btn-primary" %></div>
+</div>
+
+<% if !@organizations.present? %>
+  <div class="col">NO DATA</div>
+<% end %>
+
+<% @organizations.each do |organization| %>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title a-link">
+        <%= link_to organization.name, organization_families_path(organization), class: 'card-link' %>
+      </h5>
+      <h6 class="card-subtitle mb-2 text-muted"><%= organization.phone %></h6>
+      <p class="card-text"><%= organization.address %></p>
+
+      <%= link_to 'Edit', edit_organization_path(organization), class: 'btn btn-warning' %>
+      <%= link_to 'Destroy', organization, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+</div>
+<% end %>
+
+
+

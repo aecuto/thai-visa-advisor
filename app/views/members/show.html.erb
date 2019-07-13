@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Full name:</strong>
+  <%= @member.full_name %>
+</p>
+
+<p>
+  <strong>Visa exp:</strong>
+  <%= @member.visa_exp %>
+</p>
+
+<p>
+  <strong>Wp exp:</strong>
+  <%= @member.wp_exp %>
+</p>
+
+<p>
+  <strong>Noti90:</strong>
+  <%= @member.noti90 %>
+</p>
+
+<p>
+  <strong>Passport exp:</strong>
+  <%= @member.passport_exp %>
+</p>
+
+<p>
+  <strong>Doe:</strong>
+  <%= @member.doe %>
+</p>
+
+<p>
+  <strong>Dob:</strong>
+  <%= @member.dob %>
+</p>
+
+<%= link_to 'Edit', edit_member_path(@member) %> |
+<%= link_to 'Back', members_path %>

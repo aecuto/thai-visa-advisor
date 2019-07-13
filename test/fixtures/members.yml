@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  full_name: MyString
+  visa_exp: 2019-07-13
+  wp_exp: 2019-07-13
+  noti90: 2019-07-13
+  passport_exp: 2019-07-13
+  doe: 2019-07-13
+  dob: 2019-07-13
+
+two:
+  full_name: MyString
+  visa_exp: 2019-07-13
+  wp_exp: 2019-07-13
+  noti90: 2019-07-13
+  passport_exp: 2019-07-13
+  doe: 2019-07-13
+  dob: 2019-07-13
