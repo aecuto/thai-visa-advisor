@@ -13,12 +13,12 @@
   <div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title a-link">
-        <%= link_to family.name, organization_families_path(family.organization_id, family), class: 'card-link' %>
+        <%= link_to family.name, organization_families_path(@organization, family), class: 'card-link' %>
       </h5>
       <p class="card-text"><%= family.phone %></p>
 
-      <%= link_to 'Edit', edit_organization_family_path(family.organization_id, family), class: 'btn btn-warning' %>
-      <%= link_to 'Destroy', organization_family_path(family.organization_id, family), class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Edit', edit_organization_family_path(@organization, family), class: 'btn btn-warning' %>
+      <%= link_to 'Destroy', organization_family_path(@organization, family), class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
     </div>
 </div>
 <% end %>

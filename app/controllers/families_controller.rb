@@ -1,10 +1,11 @@
 class FamiliesController < ApplicationController
-  before_action :set_family, only: [:show, :edit, :update, :destroy]
+  before_action :set_family, only: [:edit, :update, :destroy]
+  before_action :set_organization
 
   # GET /families
   # GET /families.json
   def index
-    @families = Family.where(organization_id: params[:organization_id]).all
+    @families = Family.where(organization_id: @organization.id)
   end
 
   # GET /families/1
@@ -26,11 +27,11 @@ class FamiliesController < ApplicationController
   # POST /families.json
   def create
     @family = Family.new(family_params)
-    @family.organization_id = params[:organization_id]
+    @family.organization_id = @organization.id
 
     respond_to do |format|
       if @family.save
-        format.html { redirect_to family_url, notice: 'Family was successfully created.' }
+        format.html { redirect_to organization_families_new_url, notice: 'Family was successfully created.' }
       else
         format.html { render :new }
       end
@@ -42,7 +43,7 @@ class FamiliesController < ApplicationController
   def update
     respond_to do |format|
       if @family.update(family_params)
-        format.html { redirect_to family_url, notice: 'Family was successfully updated.' }
+        format.html { redirect_to organization_families_new_url, notice: 'Family was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -54,7 +55,7 @@ class FamiliesController < ApplicationController
   def destroy
     @family.destroy
     respond_to do |format|
-      format.html { redirect_to family_url, notice: 'Family was successfully destroyed.' }
+      format.html { redirect_to organization_families_new_url, notice: 'Family was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -62,11 +63,15 @@ class FamiliesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_family
-      @family = Family.find(params[:id])
+      @family = Family.friendly.find(params[:id])
     end
 
-    def family_url
-      organization_families_path(params[:organization_id])
+    def set_organization
+      @organization = Organization.friendly.find(params[:organization_id])
+    end
+
+    def organization_families_new_url
+      organization_families_path(@organization)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
