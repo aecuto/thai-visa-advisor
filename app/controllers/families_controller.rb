@@ -1,4 +1,6 @@
 class FamiliesController < ApplicationController
+  load_and_authorize_resource :find_by => :name
+
   before_action :set_family, only: [:edit, :update, :destroy]
   before_action :set_organization
 

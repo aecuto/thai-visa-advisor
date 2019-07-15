@@ -1,4 +1,6 @@
 class OrganizationsController < ApplicationController
+  load_and_authorize_resource :find_by => :name
+
   before_action :set_organization, only: [:show, :edit, :update, :destroy]
 
   # GET /organizations
