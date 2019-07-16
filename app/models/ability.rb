@@ -11,8 +11,8 @@ class Ability
         can :manage, Organization
         can :read, Family
       elsif user.is_family?
-        can :manage, Family
         can :manage, Member
+        cannot :new, Member
       end
     end
 

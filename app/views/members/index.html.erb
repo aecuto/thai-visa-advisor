@@ -1,8 +1,11 @@
-<p id="notice"><%= notice %></p>
 
 <div class="row manage-title">
   <div class="col"><h1>Members</h1></div>
-  <div class="col text-right"><%= link_to 'New Member', new_organization_family_member_path, class: "btn btn-primary" %></div>
+  <div class="col text-right">
+    <% if can? :new, @member %>
+      <%= link_to 'New Member', new_organization_family_member_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
 </div>
 
 <% if !@members.present? %>

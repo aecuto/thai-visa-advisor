@@ -15,12 +15,17 @@
 
   <%= form.text_field :first_name %>
   <%= form.text_field :last_name %>
-  <%= form.date_field :visa_exp %>
-  <%= form.date_field :wp_exp %>
-  <%= form.date_field :noti90 %>
-  <%= form.date_field :passport_exp %>
+  
+  <% if !current_user.is_family %>
+    <%= form.date_field :visa_exp %>
+    <%= form.date_field :wp_exp %>
+    <%= form.date_field :noti90 %>
+    <%= form.date_field :passport_exp %>
+  <% end %>
+
   <%= form.date_field :doe %>
   <%= form.date_field :dob %>
+
   <%= form.submit %>
 
 <% end %>

@@ -12,6 +12,7 @@ gem 'rails_admin', '~> 2.0.0.beta'
 gem 'cancancan'
 gem "bootstrap_form", ">= 4.2.0"
 gem 'friendly_id', '~> 5.2.4'
+gem 'toastr-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
