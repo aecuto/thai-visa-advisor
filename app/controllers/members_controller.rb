@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  load_and_authorize_resource :find_by => :name
+  load_and_authorize_resource :find_by => :first_name
 
   before_action :set_member, only: [:edit, :update, :destroy]
   before_action :set_organization, :set_family
