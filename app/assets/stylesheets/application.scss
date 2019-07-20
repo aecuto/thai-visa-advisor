@@ -17,15 +17,18 @@
  */
 
  @import "bootstrap";
-
-.btn {
-  margin-top: 15px;
- }
-
+ @import "font-awesome";
+ 
 .manage-title {
   margin-bottom: 15px;
 }
+.card {
+  margin-bottom: 10px;
+}
 
+.hidden {
+  display: none;
+}
 // a:visited {
 //   color: white;
 // }

@@ -10,17 +10,21 @@
 
 <div class="row">
 <% @organizations.each do |organization| %>
-<div class="col-3">
+<div class="col-12">
   <div class="card">
+    <h3 class="card-header">
+      <%= link_to organization.name, organization_families_path(organization), class: 'card-link' %>
+    </h3>
     <div class="card-body">
-      <h5 class="card-title a-link">
-        <%= link_to organization.name, organization_families_path(organization), class: 'card-link' %>
-      </h5>
       <h6 class="card-subtitle mb-2 text-muted"><%= organization.phone %></h6>
       <p class="card-text"><%= organization.address %></p>
 
-      <%= link_to 'Edit', edit_organization_path(organization), class: 'btn btn-warning' %>
-      <%= link_to 'Destroy', organization, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+      <hr>
+      <div class="col text-right">
+        <%= link_to 'Edit', edit_organization_path(organization), class: 'btn btn-warning' %>
+        <%= link_to 'Destroy', organization, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+      
     </div>
   </div>
 </div>

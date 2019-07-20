@@ -1,6 +1,6 @@
 
 <div class="row manage-title">
-  <div class="col"><h1>Members</h1></div>
+  <div class="col"><h1>Family: <%= @family.name %></h1></div>
   <div class="col text-right">
     <% if can? :new, @member %>
       <%= link_to 'New Member', new_organization_family_member_path, class: "btn btn-primary" %>
@@ -13,23 +13,39 @@
 <% end %>
 
 <div class="row">
-<% @members.each do |member| %>
-<div class="col-3">
+<% @members.each_with_index do |member, index| %>
+<div class="col-12">
   <div class="card">
-    <div class="card-body">
-      <h5 class="card-title a-link">
-       <%= member.first_name %> <%= member.last_name %> 
-      </h5>
-      <p class="card-text">visa_exp: <%= member.visa_exp || '-' %></p>
-      <p class="card-text">wp_exp: <%= member.wp_exp || '-' %></p>
-      <p class="card-text">noti90: <%= member.noti90 || '-'%></p>
-      <p class="card-text">passport_exp: <%= member.passport_exp || '-'%></p>
-      <p class="card-text">passport_exp: <%= member.passport_exp || '-'%></p>
-      <p class="card-text">doe: <%= member.doe || '-'%></p>
-      <p class="card-text">dob: <%= member.dob || '-'%></p>
+    <h5 class="card-header">
+      <div class="row">
+        <div class="col-9">
+          <%= member.first_name %> <%= member.last_name %>
+        </div>
+        <div class="col text-right">
+          <button class='btn btn-info' onclick="toggle(this)">
+            <%= fa_icon  index > 0 ? "chevron-down" : "chevron-up" %>
+          </button>
+        </div>
+      </div>
+    </h5>
+    <div class="card-body <%= index > 0 && 'hidden'%>">
 
-      <%= link_to 'Edit', edit_organization_family_member_path(@organization, @family, member), class: 'btn btn-warning' %>
-      <%= link_to 'Destroy', organization_family_member_path(@organization, @family, member), class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+      <div class="row">
+        <h6 class="card-text col-4">visa_exp: <%= member.visa_exp || '-' %></h6>
+        <h6 class="card-text col-4">wp_exp: <%= member.wp_exp || '-' %></h6>
+        <h6 class="card-text col-4">noti90: <%= member.noti90 || '-'%></h6>
+        <h6 class="card-text col-4">passport_exp: <%= member.passport_exp || '-'%></h6>
+        <h6 class="card-text col-4">passport_exp: <%= member.passport_exp || '-'%></h6>
+        <h6 class="card-text col-4">doe: <%= member.doe || '-'%></h6>
+        <h6 class="card-text col-4">dob: <%= member.dob || '-'%></h6>
+      </div>
+
+      <hr>
+      <div class="col text-right">
+        <%= link_to 'Edit', edit_organization_family_member_path(@organization, @family, member), class: 'btn btn-warning' %>
+        <%= link_to 'Destroy', organization_family_member_path(@organization, @family, member), class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+
     </div>
   </div>
 </div>

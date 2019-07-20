@@ -1,0 +1,35 @@
+<div class="row manage-title">
+  <div class="col"><h1>Notice</h1></div>
+  <div class="col text-right"><%= link_to 'New Notice', new_notice_path, class: "btn btn-primary" %></div>
+</div>
+
+<% if !@notices.present? %>
+  <div class="col">NO DATA</div>
+<% end %>
+
+<div class="row">
+<% @notices.each do |notice| %>
+<div class="col-12">
+  <div class="card">
+    <h3 class="card-header">
+      <%= notice.message %>
+    </h3>
+    <div class="card-body">
+      <h6 class="card-subtitle mb-2 text-muted">Create At: <%= notice.created_at %></h6>
+      <p class="card-text">Update At: <%= notice.updated_at %></p>
+
+      <hr>
+      <div class="col text-right">
+        <%= link_to 'Edit', edit_notice_path(notice), class: 'btn btn-warning' %>
+        <%= link_to 'Destroy', notice, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<% end %>
+</div>
+
+
+
+
