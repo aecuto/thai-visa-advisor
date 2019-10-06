@@ -3,12 +3,12 @@ class HomeController < ApplicationController
 
   def index
     @notices = Notice.all
-    # if current_user.present?
-    #   if current_user.is_family
-    #     @family = current_user.family
-    #     redirect_to organization_family_members_path(@family.organization, @family)
-    #   end
-    # end
+    if current_user.present?
+      if current_user.is_family
+        @family = current_user.family
+        redirect_to family_members_path(@family)
+      end
+    end
   end
 
 end

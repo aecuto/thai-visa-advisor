@@ -12,7 +12,9 @@ class Ability
         cannot :new, Member
       end
     end
-
+    
+    can :register, Family
+    can :register_confirm, Family
   end
 
 end

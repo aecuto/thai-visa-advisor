@@ -30,6 +30,7 @@
       <% if !user_signed_in? %>
         <div class="col-12">
           <%= link_to 'Login', new_user_session_path, class: 'btn btn-outline-dark' %>  
+          <%= link_to 'Register', families_register_path, class: 'btn btn-outline-info' %>  
         </div>
       <% end %>
 

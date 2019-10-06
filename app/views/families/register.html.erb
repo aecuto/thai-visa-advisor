@@ -1,0 +1,8 @@
+<h1>Register</h1>
+
+<%= bootstrap_form_tag url: families_register_url, method: :get do |f| %>
+  <%= f.text_field :passport_no %>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to 'Back', families_path, class: "btn btn-info" %>

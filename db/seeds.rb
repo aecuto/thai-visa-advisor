@@ -8,11 +8,11 @@
 
 User.create(email: 'admin@admin.com', password: 'password', is_admin: true) #User 1
 
-Family.create(passport_no: 'a0001', name: 'family 1', phone: '0123456789') #fam 1
+Family.create(passport_no: 'a01', name: 'family 1', phone: '0123456789') #fam 1
 
-Family.create(passport_no: 'a0002', name: 'family 2', phone: '0123456789') #fam 2
+Family.create(passport_no: 'a02', name: 'family 2', phone: '0123456789') #fam 2
 
-Family.create(passport_no: 'a0003', name: 'family 3', phone: '0123456789') #fam 3
+Family.create(passport_no: 'a03', name: 'family 3', phone: '0123456789') #fam 3
 
 for i in 1..7
   Member.create(first_name: "bobs #{i}", last_name: "family 1", family_id: 1)

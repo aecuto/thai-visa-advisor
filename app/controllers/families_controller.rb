@@ -3,6 +3,8 @@ class FamiliesController < ApplicationController
 
   before_action :set_family, only: [:edit, :update, :destroy]
 
+  skip_before_action :authenticate_user!, :only => [:register, :register_confirm]
+
   # GET /families
   # GET /families.json
   def index
@@ -57,6 +59,46 @@ class FamiliesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to families_path, notice: 'Family was successfully destroyed.' }
     end
+  end
+
+  def register
+    @passport_no = params[:passport_no]
+
+    family = Family.find_by(passport_no: @passport_no)
+    user = User.find(family.user_id) if family
+
+    if family && !user
+      render :register_confirm
+    end
+
+    if user
+      flash[:alert] = "Passport no registered!"
+    else
+      flash[:error] = "#{@passport_no} not found!" if @passport_no
+    end
+
+  end
+
+  def register_confirm
+
+    user_params = params[:user]
+    family = Family.find_by(passport_no: user_params["passport_no"])
+    new_user = User.new(email: user_params["email"], password: user_params["password"], password_confirmation: user_params["password_confirmation"], is_family: user_params["is_family"]) 
+
+    if new_user.save && family
+
+      family.user_id = new_user.id
+      family.save
+
+      flash[:success] = "Register Success!"
+      redirect_to root_path
+    else
+
+      flash[:error] = "Email or Password not correct!"
+      redirect_to families_register_path
+    end
+
+
   end
 
   private
