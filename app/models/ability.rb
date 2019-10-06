@@ -7,10 +7,6 @@ class Ability
     if user.present?
       if user.is_admin?
         can :manage, :all
-      elsif user.is_organization?
-        can :manage, Family
-        can :manage, Member
-        cannot :new, Member
       elsif user.is_family?
         can :manage, Member
         cannot :new, Member

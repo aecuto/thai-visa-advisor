@@ -2,12 +2,11 @@ class FamiliesController < ApplicationController
   load_and_authorize_resource :find_by => :name
 
   before_action :set_family, only: [:edit, :update, :destroy]
-  before_action :set_organization
 
   # GET /families
   # GET /families.json
   def index
-    @families = Family.where(organization_id: @organization.id)
+    @families = Family.all
   end
 
   # GET /families/1
@@ -18,7 +17,7 @@ class FamiliesController < ApplicationController
   # GET /families/new
   def new
     @family = Family.new
-    @family.build_user
+    # @family.build_user
   end
 
   # GET /families/1/edit
@@ -29,11 +28,10 @@ class FamiliesController < ApplicationController
   # POST /families.json
   def create
     @family = Family.new(family_params)
-    @family.organization_id = @organization.id
 
     respond_to do |format|
       if @family.save
-        format.html { redirect_to organization_families_new_url, notice: 'Family was successfully created.' }
+        format.html { redirect_to families_path, notice: 'Family was successfully created.' }
       else
         format.html { render :new }
       end
@@ -45,7 +43,7 @@ class FamiliesController < ApplicationController
   def update
     respond_to do |format|
       if @family.update(family_params)
-        format.html { redirect_to organization_families_new_url, notice: 'Family was successfully updated.' }
+        format.html { redirect_to families_path, notice: 'Family was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -57,7 +55,7 @@ class FamiliesController < ApplicationController
   def destroy
     @family.destroy
     respond_to do |format|
-      format.html { redirect_to organization_families_new_url, notice: 'Family was successfully destroyed.' }
+      format.html { redirect_to families_path, notice: 'Family was successfully destroyed.' }
     end
   end
 
@@ -67,17 +65,8 @@ class FamiliesController < ApplicationController
       @family = Family.friendly.find(params[:id])
     end
 
-    def set_organization
-      @organization = Organization.friendly.find(params[:organization_id])
-    end
-
-    def organization_families_new_url
-      organization_families_path(@organization)
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def family_params
-      params.require(:family).permit(:name, :phone,
-      user_attributes: [:id, :email, :password, :password_confirmation, :role])
+      params.require(:family).permit(:passport_no, :name, :phone)
     end
 end

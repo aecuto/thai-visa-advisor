@@ -2,7 +2,7 @@ class MembersController < ApplicationController
   load_and_authorize_resource :find_by => :first_name
 
   before_action :set_member, only: [:edit, :update, :destroy]
-  before_action :set_organization, :set_family
+  before_action :set_family
 
   # GET /members
   # GET /members.json
@@ -32,7 +32,7 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.save
-        format.html { redirect_to organization_family_members_new_url, notice: 'Member was successfully created.' }
+        format.html { redirect_to family_members_new_url, notice: 'Member was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -44,7 +44,7 @@ class MembersController < ApplicationController
   def update
     respond_to do |format|
       if @member.update(member_params)
-        format.html { redirect_to organization_family_members_new_url, notice: 'Member was successfully updated.' }
+        format.html { redirect_to family_members_new_url, notice: 'Member was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -56,7 +56,7 @@ class MembersController < ApplicationController
   def destroy
     @member.destroy
     respond_to do |format|
-      format.html { redirect_to organization_family_members_new_url, notice: 'Member was successfully destroyed.' }
+      format.html { redirect_to family_members_new_url, notice: 'Member was successfully destroyed.' }
     end
   end
 
@@ -70,12 +70,8 @@ class MembersController < ApplicationController
       @family = Family.friendly.find(params[:family_id])
     end
 
-    def set_organization
-      @organization = Organization.friendly.find(params[:organization_id])
-    end
-
-    def organization_family_members_new_url
-      organization_family_members_path(@organization, @family)
+    def family_members_new_url
+      family_members_path(@family)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

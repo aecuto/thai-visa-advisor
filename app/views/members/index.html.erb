@@ -3,7 +3,7 @@
   <div class="col"><h1>Family: <%= @family.name %></h1></div>
   <div class="col text-right">
     <% if can? :new, @member %>
-      <%= link_to 'New Member', new_organization_family_member_path, class: "btn btn-primary" %>
+      <%= link_to 'New Member', new_family_member_path, class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
@@ -42,8 +42,8 @@
 
       <hr>
       <div class="col text-right">
-        <%= link_to 'Edit', edit_organization_family_member_path(@organization, @family, member), class: 'btn btn-warning' %>
-        <%= link_to 'Destroy', organization_family_member_path(@organization, @family, member), class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Edit', edit_family_member_path(@family, member), class: 'btn btn-warning' %>
+        <%= link_to 'Destroy', family_member_path(@family, member), class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
       </div>
 
     </div>

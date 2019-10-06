@@ -1,7 +1,7 @@
 
 <div class="row manage-title">
-  <div class="col-9"><h3>Organization: <%= @organization.name %></h3></div>
-  <div class="col text-right"><%= link_to 'New Family', new_organization_family_path, class: "btn btn-primary" %></div>
+  <div class="col-9"><h3>LIST</h3></div>
+  <div class="col text-right"><%= link_to 'New Family', new_family_path, class: "btn btn-primary" %></div>
 </div>
 
 <% if !@families.present? %>
@@ -13,15 +13,16 @@
 <div class="col-12">
   <div class="card">
     <h3 class="card-header">
-      <%= link_to family.name, organization_family_members_path(@organization, family), class: 'card-link' %>
+      <%= link_to family.name, family_members_path(family), class: 'card-link' %>
     </h3>
     <div class="card-body">
+      <p class="card-text"><%= family.passport_no %></p>
       <p class="card-text"><%= family.phone %></p>
 
       <hr>
       <div class="col text-right">
-        <%= link_to 'Edit', edit_organization_family_path(@organization, family), class: 'btn btn-warning' %>
-        <%= link_to 'Destroy', organization_family_path(@organization, family), class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Edit', edit_family_path(family), class: 'btn btn-warning' %>
+        <%= link_to 'Destroy', family_path(family), class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
       </div>
 
     </div>

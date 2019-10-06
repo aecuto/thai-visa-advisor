@@ -8,7 +8,6 @@ gem 'jquery-rails'
 gem 'bootstrap', '~> 4.3.1'
 gem 'devise'
 gem 'devise-bootstrap-views', '~> 1.0'
-gem 'rails_admin', '~> 2.0.0.beta'
 gem 'cancancan'
 gem "bootstrap_form", ">= 4.2.0"
 gem 'friendly_id', '~> 5.2.4'

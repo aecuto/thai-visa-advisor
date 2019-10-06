@@ -1,21 +1,8 @@
 <%= bootstrap_form_with(model: family, local: true, url: url) do |form| %>
 
-  <%= form.fields_for :user do |f| %>
-    <%= f.text_field :email %>
-    <%= f.password_field :password %>
-    <%= f.password_field :password_confirmation %>
-    <%= f.hidden_field :is_family, value: true %>
-  <% end %>
+  <%= form.text_field :passport_no %>
+  <%= form.text_field :name %>
+  <%= form.text_field :phone %>
+  <%= form.submit %>
 
-  <div class="field">
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.text_field :phone %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>
